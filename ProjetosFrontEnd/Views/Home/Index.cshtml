@@ -1,8 +1,86 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Grupos de Usuarios";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+@model Projetos
+@using Newtonsoft.Json;
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<h1 class="mb-5">Grupos de Usuarios</h1>
+
+<form asp-action="SalvarGrupo" asp-controller="Grupos" method="post">
+    <div class="row">
+        <input class="d-none" asp-for="@Model.Grupo.Id" value="null" id="campoId" />
+        <div class="col-12 col-lg-5 col-xl-2 mb-3;" style="width: 100%; padding: 5px">
+            <label for="nome">Nome</label>
+            <input asp-for="@Model.Grupo.Nome" id="nome" class="form-control mb-3;" />
+            <span asp-validation-for="@Model.Grupo.Nome" class="text-danger"></span>
+        </div>
+    </div>
+    <div>
+        <div class="col-4 col-lg-4 col-xl-4 mb-2" style="width: 80%; padding: 5px">
+            <h1>Permissões</h1>
+                @foreach (var modulo in Model.Modulos)
+                {
+                    <div class="row">
+                        <input class="form-check mt-3" style="font-size: 20px" type="checkbox" value="@modulo.Id" id= "@modulo.Id"  name="@modulo.Id">
+                        <label class="ml-3" style="font-size: 20px">@modulo.Nome</label>
+                    </div>
+                }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2 col-lg-2 col-xl-2" style="width: 100%; padding: 5px">
+            <label for="paginaInicial">página inicial</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2 col-lg-2 col-xl-2" style="width: 100%; padding: 5px">
+            <select id="select" asp-for="@Model.Grupo.IdPagina">
+                <option disabled>Escolha uma página</option>
+            </select>
+            <span asp-validation-for="@Model.Grupo.IdPagina" class="text-danger"></span>
+            <button id="btn-salvar" type="submit" class="btn btn-dark right mt-2" style="border-radius: 30px;width:100%;">Salvar</button>
+        </div>
+    </div>
+</form>
+<div class="row">
+    <div class="col-xl-12 col-12" id="container-tabela">
+        <div class="row" style="overflow:auto">
+            <table class="table table-hover mt-5" style="text-align:center;">
+                <thead class="thead-dark">
+                    <tr>
+                        <th class="d-none" scope="col">Id</th>
+                        <th scope="col" class="col-xl-4 col-4">Nome</th>
+                        <th scope="col" class="col-xl-4 col-4">Página Inicial</th>
+                        <th scope="col" class="col-xl-4 col-4">Status</th>
+                        <th scope="col">Alterar</th>
+                        <th scope="col">Desativar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var grupo in Model.Grupos)
+                    {
+                        var paginas = Model.Paginas;
+
+                        <tr>
+                            <td id="td-Nome-@grupo.Id">@grupo.Nome</td>
+                            <td id="td-Pagina-@grupo.Id">
+                                @foreach (var pagina in paginas)
+                                {
+                                    @if (grupo.IdPagina == pagina.Id)
+                                    {@pagina.Caminho}
+                                }
+                            </td>
+                            <td id="td-Status-@grupo.Id">@grupo.Status</td>
+                            <td><button id="@grupo.Id" onclick="CarregarDadosInput(this)" class="btn btn-dark" style="border-radius: 10px;width:100%;"><i class="fa fa-edit"></i> Alterar</button></td>
+                            <td><button id="@grupo.Id" onclick="AtivarDesativarUsuario(this)" type="submit" class="btn btn-dark" style="border-radius: 10px; width:100%;">@grupo.TextoBotaoAtivarDesativar</button></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>

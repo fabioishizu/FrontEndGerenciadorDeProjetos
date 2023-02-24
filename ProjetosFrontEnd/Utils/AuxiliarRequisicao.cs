@@ -1,13 +1,14 @@
 ﻿using ProjetosFrontEnd.Models;
 using System.Text;
 using System.Net;
+using System.Net.Http.Headers;
 
 namespace ProjetosFrontEnd.Utils;
 
 public class AuxiliarRequisicao
 {
     private static Configuration configuracao;
-    public static async Task<T> RequisitarAPI<T>(HttpMethod metodoHttp, string uriRota, IHttpClientFactory clientFactory, string body = null)
+    public static async Task<T> RequisitarAPI<T>(HttpMethod metodoHttp, string uriRota, IHttpClientFactory clientFactory, string body = null, string token = null)
     {
         if (configuracao == null)
             configuracao = LerConfiguracao();
@@ -18,6 +19,9 @@ public class AuxiliarRequisicao
             request.Content = new StringContent(body, Encoding.UTF8, "application/json");
 
         var client = clientFactory.CreateClient();
+
+        if(token != null)
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
         var response = await client.SendAsync(request);
 
