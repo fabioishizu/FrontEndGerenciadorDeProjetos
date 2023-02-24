@@ -24,3 +24,12 @@ C:\Users\fabio.masao\Desktop\FrontEndGerenciadorDeProjetos\ProjetosFrontEnd\obj\
 C:\Users\fabio.masao\Desktop\FrontEndGerenciadorDeProjetos\ProjetosFrontEnd\obj\Debug\net6.0\ProjetosFrontEnd.pdb
 C:\Users\fabio.masao\Desktop\FrontEndGerenciadorDeProjetos\ProjetosFrontEnd\obj\Debug\net6.0\ProjetosFrontEnd.genruntimeconfig.cache
 C:\Users\fabio.masao\Desktop\FrontEndGerenciadorDeProjetos\ProjetosFrontEnd\obj\Debug\net6.0\ref\ProjetosFrontEnd.dll
+C:\Users\fabio.masao\Desktop\FrontEndGerenciadorDeProjetos\ProjetosFrontEnd\bin\Debug\net6.0\System.Net.Http.Formatting.dll
+C:\Users\fabio.masao\Desktop\FrontEndGerenciadorDeProjetos\ProjetosFrontEnd\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\fabio.masao\Desktop\FrontEndGerenciadorDeProjetos\ProjetosFrontEnd\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\fabio.masao\Desktop\FrontEndGerenciadorDeProjetos\ProjetosFrontEnd\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\fabio.masao\Desktop\FrontEndGerenciadorDeProjetos\ProjetosFrontEnd\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\fabio.masao\Desktop\FrontEndGerenciadorDeProjetos\ProjetosFrontEnd\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\fabio.masao\Desktop\FrontEndGerenciadorDeProjetos\ProjetosFrontEnd\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
+C:\Users\fabio.masao\Desktop\FrontEndGerenciadorDeProjetos\ProjetosFrontEnd\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\fabio.masao\Desktop\FrontEndGerenciadorDeProjetos\ProjetosFrontEnd\obj\Debug\net6.0\ProjetosFrontEnd.csproj.CopyComplete

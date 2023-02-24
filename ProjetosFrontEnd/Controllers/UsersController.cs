@@ -1,21 +1,37 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using ProjetosFrontEnd.Models;
+using ProjetosFrontEnd.Utils;
 using System.Diagnostics;
 
 namespace ProjetosFrontEnd.Controllers
 {
     public class UsersController : Controller
     {
-        private readonly ILogger<UsersController> _logger;
+        private readonly IHttpClientFactory clientFactory;
+        List<Users> users;
 
-        public UsersController(ILogger<UsersController> logger)
+        public UsersController(IHttpClientFactory clientFactory)
         {
-            _logger = logger;
+            this.clientFactory = clientFactory;
         }
 
         public IActionResult Index()
         {
             return View();
+        }
+
+        public async Task<ActionResult> Autenticar([FromForm] LoginUser user)
+        {
+            try
+            {
+                user = await AuxiliarRequisicao.RequisitarAPI<LoginUser>(HttpMethod.Post, "Users/login", clientFactory, JsonConvert.SerializeObject(user));
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
         public IActionResult Privacy()
