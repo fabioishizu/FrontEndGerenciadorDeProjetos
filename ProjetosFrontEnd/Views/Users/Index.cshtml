@@ -1,0 +1,86 @@
+﻿@{
+    ViewData["Title"] = "Login";
+    Layout = null;
+}
+
+@model Users
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Controle Projetos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bakbak+One&display=swap" rel="stylesheet">
+
+    <script src="https://kit.fontawesome.com/c3bcbf7a82.js" crossorigin="anonymous"></script>
+
+    <style>
+        html,
+        body {
+            height: 100%;
+            background-color: #d9d9d9;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            padding-top: 50px;
+            padding-bottom: 50px;
+            flex-direction: column;
+        }
+
+        .form-entrar {
+            width: 100%;
+            max-width: 330px;
+            padding: 15px;
+            margin: auto;
+        }
+
+        input {
+            border: none;
+        }
+
+        .campo-icone {
+            border-bottom: 2px solid black;
+        }
+    </style>
+
+    <link rel="icon" href="~/favicon.png">
+</head>
+<body class="text-center justify-content-center">
+
+    @if (ViewData["ErroLogin"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @ViewData["ErroLogin"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <main class="m-3" style="padding: 30px; box-shadow: 0px 0px 20px 0px black; background: #fff;">
+        <form asp-action="Autenticar" asp-controller="Usuario" method="post">
+            <h1 class="mb-5" style="font-family: 'Bakbak One', cursive;">Controle de Projetos</h1>
+            <div class="campo-icone mt-2 mb-2 d-flex align-items-center">
+                <i class="fas fa-user icon" style="margin-right: 10px;"></i>
+                <input asp-for="@Model.UserName" class="p-2 w-100 input-field" type="text" placeholder="Usuário" autocomplete="off">
+            </div>
+            <span asp-validation-for="@Model.UserName" class="text-danger"></span>
+            <div class="campo-icone mt-3 mb-2 d-flex align-items-center">
+                <i class="fas fa-key icon" style="margin-right: 10px;"></i>
+                <input asp-for="@Model.Password" class="p-2 w-100 input-field" type="password" placeholder="Senha" autocomplete="off">
+            </div>
+            <span asp-validation-for="@Model.Password" class="text-danger" style="max-width: 330px;"></span>
+            <button class="p-2 mt-5 mb-2 w-100 btn btn-dark" type="submit">Entrar</button>
+        </form>
+    </main>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>
