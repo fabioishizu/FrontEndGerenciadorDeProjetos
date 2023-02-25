@@ -15,12 +15,12 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\fabio.masao\Desktop\FrontEndGerenciadorDeProjetos\ProjetosFrontEnd
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/fabio.masao/Desktop/FrontEndGerenciadorDeProjetos/ProjetosFrontEnd/Views/Home/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+[C:/Users/fabio.masao/Desktop/FrontEndGerenciadorDeProjetos/ProjetosFrontEnd/Views/Project/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvamVjdFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/fabio.masao/Desktop/FrontEndGerenciadorDeProjetos/ProjetosFrontEnd/Views/Home/Privacy.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+[C:/Users/fabio.masao/Desktop/FrontEndGerenciadorDeProjetos/ProjetosFrontEnd/Views/Project/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvamVjdFxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/fabio.masao/Desktop/FrontEndGerenciadorDeProjetos/ProjetosFrontEnd/Views/Shared/Error.cshtml]
