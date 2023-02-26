@@ -1,47 +1,32 @@
 ﻿@{
-    ViewData["Title"] = "Grupos de Usuarios";
+    ViewData["Title"] = "Projects";
 }
 
-@model Projetos
+@model ProjectViewModel
 @using Newtonsoft.Json;
+@using ProjetosFrontEnd.Views.ViewModel;
 
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<h1 class="mb-5">Grupos de Usuarios</h1>
+<h1 class="mb-5">Project</h1>
 
-<form asp-action="SalvarGrupo" asp-controller="Grupos" method="post">
+<form asp-action="InsertProject" asp-controller="Project" method="post">
     <div class="row">
-        <input class="d-none" asp-for="@Model.Grupo.Id" value="null" id="campoId" />
+        <input class="d-none" asp-for="@Model.Project.ProjectId" value="null" id="campoId" />
+        <input class="d-none" asp-for="@Model.Token" value="@ViewData["Token"]" id="token" />
         <div class="col-12 col-lg-5 col-xl-2 mb-3;" style="width: 100%; padding: 5px">
             <label for="nome">Nome</label>
-            <input asp-for="@Model.Grupo.Nome" id="nome" class="form-control mb-3;" />
-            <span asp-validation-for="@Model.Grupo.Nome" class="text-danger"></span>
+            <input asp-for="@Model.Project.Name" id="nome" class="form-control mb-3;" />
+            <span asp-validation-for="@Model.Project.Name" class="text-danger"></span>
         </div>
     </div>
     <div>
-        <div class="col-4 col-lg-4 col-xl-4 mb-2" style="width: 80%; padding: 5px">
-            <h1>Permissões</h1>
-                @foreach (var modulo in Model.Modulos)
-                {
-                    <div class="row">
-                        <input class="form-check mt-3" style="font-size: 20px" type="checkbox" value="@modulo.Id" id= "@modulo.Id"  name="@modulo.Id">
-                        <label class="ml-3" style="font-size: 20px">@modulo.Nome</label>
-                    </div>
-                }
-        </div>
+
     </div>
     <div class="row">
         <div class="col-2 col-lg-2 col-xl-2" style="width: 100%; padding: 5px">
-            <label for="paginaInicial">página inicial</label>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-2 col-lg-2 col-xl-2" style="width: 100%; padding: 5px">
-            <select id="select" asp-for="@Model.Grupo.IdPagina">
-                <option disabled>Escolha uma página</option>
-            </select>
-            <span asp-validation-for="@Model.Grupo.IdPagina" class="text-danger"></span>
+            <span asp-validation-for="@Model.Project.ProjectId" class="text-danger"></span>
             <button id="btn-salvar" type="submit" class="btn btn-dark right mt-2" style="border-radius: 30px;width:100%;">Salvar</button>
         </div>
     </div>
@@ -54,29 +39,17 @@
                     <tr>
                         <th class="d-none" scope="col">Id</th>
                         <th scope="col" class="col-xl-4 col-4">Nome</th>
-                        <th scope="col" class="col-xl-4 col-4">Página Inicial</th>
-                        <th scope="col" class="col-xl-4 col-4">Status</th>
                         <th scope="col">Alterar</th>
-                        <th scope="col">Desativar</th>
+                        <th scope="col">Excluir</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var grupo in Model.Grupos)
+                    @foreach (var project in Model.Projects)
                     {
-                        var paginas = Model.Paginas;
-
                         <tr>
-                            <td id="td-Nome-@grupo.Id">@grupo.Nome</td>
-                            <td id="td-Pagina-@grupo.Id">
-                                @foreach (var pagina in paginas)
-                                {
-                                    @if (grupo.IdPagina == pagina.Id)
-                                    {@pagina.Caminho}
-                                }
-                            </td>
-                            <td id="td-Status-@grupo.Id">@grupo.Status</td>
-                            <td><button id="@grupo.Id" onclick="CarregarDadosInput(this)" class="btn btn-dark" style="border-radius: 10px;width:100%;"><i class="fa fa-edit"></i> Alterar</button></td>
-                            <td><button id="@grupo.Id" onclick="AtivarDesativarUsuario(this)" type="submit" class="btn btn-dark" style="border-radius: 10px; width:100%;">@grupo.TextoBotaoAtivarDesativar</button></td>
+                            <td id="td-Nome-@project.ProjectId">@project.Name</td>
+                            <td><button id="@project.ProjectId" onclick="GetValue(this)" class="btn btn-dark" style="border-radius: 10px;width:100%;"><i class="fa fa-edit"></i> Alterar</button></td>
+                            <td><button id="@project.ProjectId" onclick="DeleteUser(this)" type="submit" class="btn btn-dark" style="border-radius: 10px; width:100%;">Excluir</button></td>
                         </tr>
                     }
                 </tbody>
@@ -84,3 +57,63 @@
         </div>
     </div>
 </div>
+@section Scripts
+    {
+        <script>
+
+            function UpdateUser(button) {
+                var idProject = button.id;
+                var name = document.getElementById('nome').innerText;
+
+                if (window.confirm("Deseja alterar o projeto selecionado?")) {
+
+                    $.ajax({
+                    url: '/Project/UpdateProject/' + idProject,
+                        type: 'POST',
+                        contentType: 'application/json',
+                    data: {
+                        name: name,
+                        updatedAt: null
+                    },
+                    }).done(function (response) {
+                        alert('Projeto alterado com sucesso!')
+                    });
+                }
+                else {
+                    document.getElementById("nome").innerText = "";
+                    alert("Projeto não foi alterado");
+                }
+                
+            }
+
+            function DeleteUser(button) {
+                var idProject = button.id;
+
+                if (window.confirm("Deseja excluir o projeto selecionado?")) {
+
+                    $.ajax({
+                        url: '/Project/DeleteProject/' + idProject,
+                        type: 'DELETE',
+                        contentType: 'application/json',
+                        data: {
+                            idProject: idProject,
+                        },
+                    }).done(function (response) {
+                        alert('Projeto excluído com sucesso!')
+                    });
+                }
+                else {
+                    document.getElementById("nome").innerText = "";
+                    alert("Projeto não foi excluido");
+                }
+
+            }
+           
+            function GetValue(button){
+                var idProject = button.id;
+                var nome = document.getElementById("td-Nome-"+idProject).innerText;
+                $('#nome').val(nome);
+                $('#campoId').val(idProject);
+            }
+        </script>
+}

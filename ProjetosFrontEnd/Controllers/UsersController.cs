@@ -26,11 +26,12 @@ namespace ProjetosFrontEnd.Controllers
             try
             {
                 user = await AuxiliarRequisicao.RequisitarAPI<LoginUser>(HttpMethod.Post, "Users/login", clientFactory, JsonConvert.SerializeObject(user));
-                return RedirectToAction("Index", "Home");
+                TempData["TokenUser"] = user.Token;
+                return RedirectToAction("Index", "Project", user);
             }
             catch (Exception ex)
             {
-                return null;
+                return RedirectToAction("Index", "Users");
             }
         }
 
